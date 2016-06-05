@@ -47,17 +47,13 @@ html{
   /*border-radius: 50%;*/
 /*}*/
 
-/*.playing {*/
-  /*outline: 1px solid gray;*/
-/*}*/
+.playing {
+  background-color: whitesmoke;
+}
 
-/*img{*/
-  /*background: red;*/
-/*}*/
 
 h1{
-  /*margin-left:;: 70px;*/
-  /*text-align: center;*/
+
   display: flex;
   align-content: center;
 

@@ -18,12 +18,6 @@ function testString(argumentName){
 
 function testCondition(condition, message) {
     if (!condition) {
-        throw message || "Assertion failed";
+  //      throw message || "Assertion failed";
     }
 }
-
-
-function assert2(value, description) {
-    var result = value ? "pass" : "fail";
-    console.log(result + ' - ' +  description);
-};

@@ -13,12 +13,19 @@
 
 'use strict';
 
+var note1 = new Audio('sound/note1.wav');
+var note2 = new Audio('sound/note2.wav');
+var note3 = new Audio('sound/note3.wav');
+var note4 = new Audio('sound/note4.wav');
+
+
 var NOTES = [
-    {sound: 'string1'},
-    {sound: 'string2'},
-    {sound: 'string3'},
-    {sound: 'string4'}
+    {sound: note1},
+    {sound: note2},
+    {sound: note3},
+    {sound: note4}
 ]
+
 
 // This is my State:
 var gState = {
@@ -29,22 +36,22 @@ var gState = {
 
 
 function init() {
-   NOTES = createNotesModel(4);
+  // NOTES = createNotesModel(4);
     //renderPiano(NOTES);
     computerTurn();
 }
 
-function createNotesModel(size){
-    var notes = [];
-
-    for (var i = 0; i < size; i++) {
-       var note = {sound : 'Note' + (i+1)};
-        //A test to see if Note is a string.
-        testString(note);
-       notes.push(note);
-    }
-    return notes;
-}
+// function createNotesModel(size){
+//     var notes = [];
+//
+//     for (var i = 0; i < size; i++) {
+//        //var note = {sound : 'Note' + (i+1)};
+//         //A test to see if Note is a string.
+//         testString(note);
+//        notes.push(note);
+//     }
+//     return notes;
+// }
 
 
 function addRandomNote() {
@@ -55,20 +62,22 @@ function addRandomNote() {
 function playSeq() {
     
     var elNotes = document.querySelectorAll('.note');
-    
+    //console.log(elNotes);
     gState.seqNoteIndexes.forEach(function (seqNoteIndex, i) {
         
         setTimeout(function playNote() {
             elNotes[seqNoteIndex].classList.add('playing');
-            
+            var noteToPlay = NOTES[i].sound;
+            noteToPlay.play();
+
             setTimeout(function donePlayingNote() {
                 elNotes[seqNoteIndex].classList.remove('playing');
 
                 // A test to check, if class remains!
-                testCondition((elNotes[seqNoteIndex].classList.contains('playing')),'class playing wasnt dropped')
+                testCondition((elNotes[seqNoteIndex].classList.contains('playing')),'class .playing wasnt dropped')
             }, 500);
 
-            console.log('Playing: ', NOTES[seqNoteIndex].sound);
+          //  console.log('Playing: ', NOTES[seqNoteIndex].sound);
         }, 1000 * i);
 
 
@@ -110,8 +119,7 @@ function noteClicked(elNote) {
     
     // console.log('elNote', elNote);
     console.log('Note', NOTES[noteIndex]);
-   
-    
+
 }
 
 function computerTurn() {
@@ -124,6 +132,7 @@ function computerTurn() {
 
      addRandomNote();
      playSeq();
+    console.log(playSeq());
 }
 
 
