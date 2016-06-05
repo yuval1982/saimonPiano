@@ -39,26 +39,13 @@ function createNotesModel(size){
 
     for (var i = 0; i < size; i++) {
        var note = {sound : 'Note' + (i+1)};
+        //A test to see if Note is a string.
+        testString(note);
        notes.push(note);
     }
     return notes;
 }
 
-// function renderPiano(notes) {
-//     // mapping notes to html tags
-//     var strHtmls = notes.map(function(note, i){
-//         var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' +
-//                              'style="background-image: url('+ note.display +')">' +
-//                             note.sound +
-//                         '</div>';
-//         return strHtml;
-//     });
-//     // background-image: url("paper.gif")
-//
-//
-//     var elPiano = document.querySelector('.piano');
-//     elPiano.innerHTML = strHtmls.join('');
-// }
 
 function addRandomNote() {
     gState.seqNoteIndexes.push(getRandomIntInclusive(0,NOTES.length-1));
@@ -76,7 +63,9 @@ function playSeq() {
             
             setTimeout(function donePlayingNote() {
                 elNotes[seqNoteIndex].classList.remove('playing');
-                // testCondition((elNotes[seqNoteIndex].classList.contains('playing')),'class playing wasnt dropped')
+
+                // A test to check, if class remains!
+                testCondition((elNotes[seqNoteIndex].classList.contains('playing')),'class playing wasnt dropped')
             }, 500);
 
             console.log('Playing: ', NOTES[seqNoteIndex].sound);
@@ -113,6 +102,9 @@ function noteClicked(elNote) {
         console.log('User Wrong!');
         var elPiano = document.querySelector('.piano');
         elPiano.style.display = 'none';
+        //Is elPiano a string.
+        testString(elPiano);
+        testCondition((elPiano.style.display === 'none'),'elPiano is is hidden, user lost');
         
     }
     
@@ -123,9 +115,9 @@ function noteClicked(elNote) {
 }
 
 function computerTurn() {
+
      gState.isUserTurn = false;
      gState.currNoteIndexToClick  = 0;
-
 
     //Checking end of users turn.
     testCondition((gState.isUserTurn === true), 'Users turn isnt off!');

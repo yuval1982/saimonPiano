@@ -10,9 +10,10 @@ function runTests() {
 
 
 
-// function testTurns(){
-//     assert(typeof argumentName === "string");
-// }
+function testString(argumentName){
+    if(typeof argumentName === "string");
+    console.log('String! works fine');
+}
 
 
 function testCondition(condition, message) {

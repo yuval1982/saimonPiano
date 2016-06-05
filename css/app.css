@@ -1,13 +1,20 @@
 html{
   background: url("../img/back2.jpeg");
-  /*background-size: 1200px 1200px;*/
-  /*background-repeat: no-repeat;*/
-  /*width: 100%;*/
+  text-align: center;
+
 }
+
 
 .container{
   display: flex;
+  background-color: transparent;
+  color: red;
+  color: #C04000;
 
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+  margin: 40px;
 }
 
 .simon{
@@ -15,6 +22,7 @@ html{
   justify-content: center;
   /*margin: auto;*/
   max-width: 50%;
+  margin-top: auto;
 
 }
 /*.piano {*/
@@ -48,69 +56,25 @@ html{
 /*}*/
 
 h1{
-  text-align: center;
+  /*margin-left:;: 70px;*/
+  /*text-align: center;*/
+  display: flex;
+  align-content: center;
+
 }
 
 audio {
   display:none;
-
 }
 
-/*#start {*/
-  /*display:block;*/
-  /*width:400px;*/
-  /*height:350px;*/
-  /*text-align:center;*/
-  /*position:relative;*/
-  /*margin:0 auto;*/
-  /*font-size:105px;*/
-  /*color:#ffffff;*/
-  /*padding-top:95px;*/
+div.container{
+  align-content: center;
+}
 
-
-
-/*}*/
 #start:hover {
   cursor:pointer;
 }
 
-/*#fail {*/
-  /*display:block;*/
-  /*width:400px;*/
-  /*height:350px;*/
-  /*text-align:center;*/
-  /*position:relative;*/
-  /*margin:0 auto;*/
-  /*font-size:105px;*/
-  /*color:#ffffff;*/
-  /*padding-top:95px;*/
-  /*display:none;*/
-/*}*/
-
-#fail span {
-  font-size:50px;
-}
-
-#fail:hover {
-  cursor:pointer;
-}
-
-/*#created {*/
-  /*position:fixed;*/
-  /*right:30px;*/
-  /*bottom:20px*/
-/*}*/
-
-/*#simon, #count {*/
-  /*filter: blur(5px); !* Doesn't work anywhere yet *!*/
-  /*-webkit-filter: blur(5px);*/
-/*}*/
-
-/*.container {*/
-  /*width:450px;*/
-  /*position:absolute;*/
-  /*margin:0 auto;*/
-/*}*/
 
 .count {
   position:absolute;
@@ -122,9 +86,6 @@ audio {
   text-align:center;
 }
 
-/*.simon {*/
-  /*position: relative;*/
-/*}*/
 .simon .first{
   position: absolute;
   display: inline-block;
