@@ -14,10 +14,10 @@
 'use strict';
 
 var NOTES = [
-    {display: 'img/square1.png', color: 'red', sound: 'string1'},
-    {display: 'img/square2.png', color: 'blue', sound: 'string2'},
-    {display: 'img/square3.png', color: 'yellow', sound: 'string3'},
-    {display: 'img/square4.png', color: 'green', sound: 'string4'}
+    {sound: 'string1'},
+    {sound: 'string2'},
+    {sound: 'string3'},
+    {sound: 'string4'}
 ]
 
 // This is my State:
@@ -29,20 +29,20 @@ var gState = {
 
 
 function init() {
-   // NOTES = createNotesModel(4);
-    renderPiano(NOTES);
+   NOTES = createNotesModel(4);
+    //renderPiano(NOTES);
     computerTurn();
 }
 
-// function createNotesModel(size){
-//     var notes = [];
-//
-//     for (var i = 0; i < size; i++) {
-//        var note = {sound : 'Note' + (i+1), color: getRandomColor()};
-//        notes.push(note);
-//     }
-//     return notes;
-// }
+function createNotesModel(size){
+    var notes = [];
+
+    for (var i = 0; i < size; i++) {
+       var note = {sound : 'Note' + (i+1)};
+       notes.push(note);
+    }
+    return notes;
+}
 
 // function renderPiano(notes) {
 //     // mapping notes to html tags
@@ -64,6 +64,7 @@ function addRandomNote() {
     gState.seqNoteIndexes.push(getRandomIntInclusive(0,NOTES.length-1));
 }
 
+
 function playSeq() {
     
     var elNotes = document.querySelectorAll('.note');
@@ -75,11 +76,13 @@ function playSeq() {
             
             setTimeout(function donePlayingNote() {
                 elNotes[seqNoteIndex].classList.remove('playing');
+                // testCondition((elNotes[seqNoteIndex].classList.contains('playing')),'class playing wasnt dropped')
             }, 500);
-            
+
             console.log('Playing: ', NOTES[seqNoteIndex].sound);
         }, 1000 * i);
-        
+
+
     });
     
     setTimeout(function () {
@@ -122,8 +125,11 @@ function noteClicked(elNote) {
 function computerTurn() {
      gState.isUserTurn = false;
      gState.currNoteIndexToClick  = 0;
-     //alert('User Turn is Over');
-     
+
+
+    //Checking end of users turn.
+    testCondition((gState.isUserTurn === true), 'Users turn isnt off!');
+
      addRandomNote();
      playSeq();
 }

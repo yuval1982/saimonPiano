@@ -6,12 +6,14 @@
   <link rel="stylesheet" href="css/app.css">
 
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/myStyle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="js/main.js"></script>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="js/general.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/tests.js"></script>
 
 
 </head>
@@ -28,11 +30,11 @@
       <div class="col-lg-6 col-lg-offset-3 text-center simon">
 
           <div class="first"></div>
-          <div onclick = "noteClicked(this)" class="green"></div>
-          <div class="red"></div>
-          <div class="yellow"></div>
-          <div class="blue"></div>
-          <div class="sixth"></div>
+          <div onclick = "noteClicked()" class="green"></div>
+          <div class="note red"></div>
+          <div class="note yellow"></div>
+          <div class="note blue"></div>
+          <div class="note sixth"></div>
           <div class="count">0</div>
 
       </div>
@@ -41,8 +43,7 @@
 
   
   
- <script src="js/general.js"></script> 
- <script src="js/app.js"></script> 
+
 </body>
 </html>
 
