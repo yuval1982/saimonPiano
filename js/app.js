@@ -13,7 +13,18 @@
  
 
 'use strict';
-var NOTES;
+
+var note1 = new Audio('sound/note1.wav');
+var note2 = new Audio('sound/note2.wav');
+var note3 = new Audio('sound/note3.wav');
+var note4 = new Audio('sound/note4.wav');
+
+var NOTES = [
+    {sound: note1},
+    {sound: note2},
+    {sound: note3},
+    {sound: note4}
+            ];
 
 // This is my State:
 var gState = {
@@ -23,8 +34,8 @@ var gState = {
 }
 
 function init() {
-    renderPiano(NOTES); 
-    computerTurn();
+    renderPiano(NOTES); // draw the piano
+    computerTurn();     // 
 }
 
 function renderPiano(notes) {
@@ -36,7 +47,6 @@ function renderPiano(notes) {
                         '</div>';
         return strHtml;
     });
-    
     
     var elPiano = document.querySelector('.piano');
     elPiano.innerHTML = strHtmls.join('');
@@ -55,7 +65,7 @@ function playNotes() {
         setTimeout(function () {
             playNote(playedNote, elNotes);
         }, 1000 * i);
-        
+
     });
     
     setTimeout(function () {
@@ -72,6 +82,8 @@ function playNote(playedNote, elNotes) {
     setTimeout(function donePlayingNote() {
         elNotes[playedNote].classList.remove('playing');
     }, 500);
+     // A test to check, if class remains!
+    testCondition((elNotes[seqNoteIndex].classList.contains('playing')),'class .playing wasnt dropped');
 }
 
 function noteClicked(elNote) {
@@ -80,37 +92,43 @@ function noteClicked(elNote) {
     var noteIndex = +elNote.getAttribute('data-note');
     console.log('noteIndex is: ', noteIndex);
     
-    
     // User clicked the right note
     if (noteIndex === gState.playedNotes[gState.currNoteToClick]) {
         console.log('User OK!');
         gState.currNoteToClick++;
         
         if (gState.currNoteToClick === gState.playedNotes.length) {
+            console.log('well played!');
             computerTurn();
-        }
-        
+        }  
         
     } else {
         console.log('User Wrong!');
         var elPiano = document.querySelector('.piano');
         elPiano.style.display = 'none';
+        //Is elPiano a string.
+        testString(elPiano);
+        testCondition((elPiano.style.display === 'none'),'elPiano is hidden, user lost');
         
     }
     
     // console.log('elNote', elNote);
     console.log('Note', NOTES[noteIndex]);
-   
-    
+
 }
 
 function computerTurn() {
-     gState.isUserTurn = false;
-     gState.currNoteToClick  = 0;
-     //alert('User Turn is Over');
-     
-     addRandomNote();
-     playNotes();
+
+    gState.isUserTurn = false;
+    gState.currNoteToClick  = 0;
+    //alert('User Turn is Over');
+    
+    addRandomNote();
+    playNotes();
+
+    //Checking end of users turn.
+    testCondition((gState.isUserTurn === true), 'Users turn isnt off!');
+    
 }
 
 
