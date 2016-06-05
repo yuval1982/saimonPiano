@@ -34,22 +34,8 @@ var gState = {
 }
 
 function init() {
-    renderPiano(NOTES); // draw the piano
-    computerTurn();     // 
-}
 
-function renderPiano(notes) {
-    // mapping notes to html tags
-    var strHtmls = notes.map(function(note, i){
-        var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' + 
-                             'style="background:'+ note.color +'">' + 
-                            note.sound + 
-                        '</div>';
-        return strHtml;
-    });
-    
-    var elPiano = document.querySelector('.piano');
-    elPiano.innerHTML = strHtmls.join('');
+    computerTurn();     // 
 }
 
 function addRandomNote() {
@@ -58,12 +44,10 @@ function addRandomNote() {
 
 function playNotes() {
     
-    var elNotes = document.querySelectorAll('.note');
-    
     gState.playedNotes.forEach(function (playedNote, i) {
-        
+        var elNote = document.querySelector('[data-note="'+ playedNote+'"]');;
         setTimeout(function () {
-            playNote(playedNote, elNotes);
+            playNote(playedNote, elNote);
         }, 1000 * i);
 
     });
@@ -75,36 +59,38 @@ function playNotes() {
    
 }
 
-function playNote(playedNote, elNotes) {
+function playNote(playedNote, elNote) {
     NOTES[playedNote].sound.play();
-    elNotes[playedNote].classList.add('playing');
+    elNote.classList.add('playing');
     
     setTimeout(function donePlayingNote() {
-        elNotes[playedNote].classList.remove('playing');
+        elNote.classList.remove('playing');
     }, 500);
      // A test to check, if class remains!
-    testCondition((elNotes[seqNoteIndex].classList.contains('playing')),'class .playing wasnt dropped');
+    testCondition((elNote.classList.contains('playing')),'class .playing wasnt dropped');
 }
 
 function noteClicked(elNote) {
     
     if (!gState.isUserTurn) return;
-    var noteIndex = +elNote.getAttribute('data-note');
-    console.log('noteIndex is: ', noteIndex);
+    var playedNote = +elNote.getAttribute('data-note');
+    console.log('playedNote is: ', playedNote);
     
     // User clicked the right note
-    if (noteIndex === gState.playedNotes[gState.currNoteToClick]) {
+    if (playedNote === gState.playedNotes[gState.currNoteToClick]) {
+        playNote(playedNote, elNote)
         console.log('User OK!');
         gState.currNoteToClick++;
         
         if (gState.currNoteToClick === gState.playedNotes.length) {
             console.log('well played!');
-            computerTurn();
+            setTimeout(computerTurn, 2000);
+            
         }  
         
     } else {
         console.log('User Wrong!');
-        var elPiano = document.querySelector('.piano');
+        var elPiano = document.querySelector('.simon');
         elPiano.style.display = 'none';
         //Is elPiano a string.
         testString(elPiano);
@@ -113,7 +99,7 @@ function noteClicked(elNote) {
     }
     
     // console.log('elNote', elNote);
-    console.log('Note', NOTES[noteIndex]);
+    // console.log('Note', NOTES[noteIndex]);
 
 }
 

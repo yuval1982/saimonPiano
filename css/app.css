@@ -1,6 +1,7 @@
 html{
-  background: url("../img/back2.jpeg");
+  background: url("../img/back2.jpeg") no-repeat;
   text-align: center;
+  background-size: cover;
 
 }
 
