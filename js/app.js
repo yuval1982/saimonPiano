@@ -9,6 +9,7 @@
 // visual
 // keep max score in localStorage
 // levels
+
  
 
 'use strict';
@@ -17,27 +18,16 @@ var NOTES;
 // This is my State:
 var gState = {
     isUserTurn : false,
-    seqNoteIndexes: [],
-    currNoteIndexToClick: 0
+    playedNotes: [],
+    currNoteToClick: 0
 }
 
 function init() {
-    NOTES = createNotesModel(3);
-    renderNotes(NOTES); 
+    renderPiano(NOTES); 
     computerTurn();
 }
 
-function createNotesModel(size){
-    var notes = [];
-    
-    for (var i = 0; i < size; i++) {
-       var note = {sound : 'Note' + (i+1), color: getRandomColor()};
-       notes.push(note);
-    }
-    return notes;
-}
-
-function renderNotes(notes) {
+function renderPiano(notes) {
     // mapping notes to html tags
     var strHtmls = notes.map(function(note, i){
         var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' + 
@@ -53,23 +43,17 @@ function renderNotes(notes) {
 }
 
 function addRandomNote() {
-    gState.seqNoteIndexes.push(getRandomIntInclusive(0,NOTES.length-1));
+    gState.playedNotes.push(getRandomIntInclusive(0,NOTES.length-1));
 }
 
-function playSeq() {
+function playNotes() {
     
     var elNotes = document.querySelectorAll('.note');
     
-    gState.seqNoteIndexes.forEach(function (seqNoteIndex, i) {
+    gState.playedNotes.forEach(function (playedNote, i) {
         
-        setTimeout(function playNote() {
-            elNotes[seqNoteIndex].classList.add('playing');
-            
-            setTimeout(function donePlayingNote() {
-                elNotes[seqNoteIndex].classList.remove('playing');
-            }, 500);
-            
-            console.log('Playing: ', NOTES[seqNoteIndex].sound);
+        setTimeout(function () {
+            playNote(playedNote, elNotes);
         }, 1000 * i);
         
     });
@@ -77,8 +61,17 @@ function playSeq() {
     setTimeout(function () {
         console.log('Done Playing Sequence!!');
         gState.isUserTurn = true;
-    }, 1000 * gState.seqNoteIndexes.length);
+    }, 1000 * gState.playedNotes.length);
    
+}
+
+function playNote(playedNote, elNotes) {
+    NOTES[playedNote].sound.play();
+    elNotes[playedNote].classList.add('playing');
+    
+    setTimeout(function donePlayingNote() {
+        elNotes[playedNote].classList.remove('playing');
+    }, 500);
 }
 
 function noteClicked(elNote) {
@@ -89,11 +82,11 @@ function noteClicked(elNote) {
     
     
     // User clicked the right note
-    if (noteIndex === gState.seqNoteIndexes[gState.currNoteIndexToClick]) {
+    if (noteIndex === gState.playedNotes[gState.currNoteToClick]) {
         console.log('User OK!');
-        gState.currNoteIndexToClick++;
+        gState.currNoteToClick++;
         
-        if (gState.currNoteIndexToClick === gState.seqNoteIndexes.length) {
+        if (gState.currNoteToClick === gState.playedNotes.length) {
             computerTurn();
         }
         
@@ -113,11 +106,11 @@ function noteClicked(elNote) {
 
 function computerTurn() {
      gState.isUserTurn = false;
-     gState.currNoteIndexToClick  = 0;
+     gState.currNoteToClick  = 0;
      //alert('User Turn is Over');
      
      addRandomNote();
-     playSeq();
+     playNotes();
 }
 
 
