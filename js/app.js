@@ -12,7 +12,13 @@
  
 
 'use strict';
-var NOTES;
+
+var NOTES = [
+    {display: 'img/square1.png', color: 'red', sound: 'string1'},
+    {display: 'img/square2.png', color: 'blue', sound: 'string2'},
+    {display: 'img/square3.png', color: 'yellow', sound: 'string3'},
+    {display: 'img/square4.png', color: 'green', sound: 'string4'}
+]
 
 // This is my State:
 var gState = {
@@ -21,36 +27,38 @@ var gState = {
     currNoteIndexToClick: 0
 }
 
+
 function init() {
-    NOTES = createNotesModel(3);
-    renderNotes(NOTES); 
+   // NOTES = createNotesModel(4);
+    renderPiano(NOTES);
     computerTurn();
 }
 
-function createNotesModel(size){
-    var notes = [];
-    
-    for (var i = 0; i < size; i++) {
-       var note = {sound : 'Note' + (i+1), color: getRandomColor()};
-       notes.push(note);
-    }
-    return notes;
-}
+// function createNotesModel(size){
+//     var notes = [];
+//
+//     for (var i = 0; i < size; i++) {
+//        var note = {sound : 'Note' + (i+1), color: getRandomColor()};
+//        notes.push(note);
+//     }
+//     return notes;
+// }
 
-function renderNotes(notes) {
-    // mapping notes to html tags
-    var strHtmls = notes.map(function(note, i){
-        var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' + 
-                             'style="background:'+ note.color +'">' + 
-                            note.sound + 
-                        '</div>';
-        return strHtml;
-    });
-    
-    
-    var elPiano = document.querySelector('.piano');
-    elPiano.innerHTML = strHtmls.join('');
-}
+// function renderPiano(notes) {
+//     // mapping notes to html tags
+//     var strHtmls = notes.map(function(note, i){
+//         var strHtml =  '<div class="note" onclick="noteClicked(this)" data-note="'+i+'"' +
+//                              'style="background-image: url('+ note.display +')">' +
+//                             note.sound +
+//                         '</div>';
+//         return strHtml;
+//     });
+//     // background-image: url("paper.gif")
+//
+//
+//     var elPiano = document.querySelector('.piano');
+//     elPiano.innerHTML = strHtmls.join('');
+// }
 
 function addRandomNote() {
     gState.seqNoteIndexes.push(getRandomIntInclusive(0,NOTES.length-1));
