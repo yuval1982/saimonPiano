@@ -4,11 +4,9 @@ html{
 
 }
 
-
 .container{
   display: flex;
   background-color: transparent;
-  color: red;
   color: #C04000;
 
   flex-wrap: wrap;
@@ -25,42 +23,15 @@ html{
   margin-top: auto;
 
 }
-/*.piano {*/
-  /*!*background: black;*!*/
-  /*display:flex;*/
-  /*justify-content: space-around;*/
-  /*flex-wrap: nowrap;*/
-/*}*/
-
-
-/*.note {*/
-  /*border: 1px solid black;*/
-  /*width:100%;*/
-  /*height:200px;*/
-  /*text-align: center;*/
-  /*margin:10px;*/
-  /*!*border-radius: 50%;*!*/
-  /*background-repeat: no-repeat;*/
-  /*background-position: center;*/
-  /*background-color: #1b6d85;*/
-  /*align-items: baseline;*/
-  /*border-radius: 50%;*/
-/*}*/
 
 .playing {
   background-color: whitesmoke;
 }
 
-
 h1{
 
   display: flex;
   align-content: center;
-
-}
-
-audio {
-  display:none;
 }
 
 div.container{
