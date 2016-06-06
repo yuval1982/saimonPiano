@@ -18,6 +18,7 @@ var note1 = new Audio('sound/note1.wav');
 var note2 = new Audio('sound/note2.wav');
 var note3 = new Audio('sound/note3.wav');
 var note4 = new Audio('sound/note4.wav');
+var win = new Audio('sound/wining.mp3');
 
 var NOTES = [
     {sound: note1},
@@ -45,7 +46,7 @@ function addRandomNote() {
 function playNotes() {
     
     gState.playedNotes.forEach(function (playedNote, i) {
-        var elNote = document.querySelector('[data-note="'+ playedNote+'"]');;
+        var elNote = document.querySelector('[data-note="'+ playedNote+'"]');
         setTimeout(function () {
             playNote(playedNote, elNote);
         }, 1000 * i);
@@ -72,7 +73,7 @@ function playNote(playedNote, elNote) {
 
 function noteClicked(elNote) {
 
-    var noteCouner = document.querySelector('.count');
+    var elNoteCounter = document.querySelector('.count');
 
     if (!gState.isUserTurn) return;
     var playedNote = +elNote.getAttribute('data-note');
@@ -80,13 +81,14 @@ function noteClicked(elNote) {
     
     // User clicked the right note
     if (playedNote === gState.playedNotes[gState.currNoteToClick]) {
-        playNote(playedNote, elNote)
+        playNote(playedNote, elNote);
         console.log('User OK!');
         gState.currNoteToClick++;
-        noteCouner.innerHTML = gState.currNoteToClick;
         
         if (gState.currNoteToClick === gState.playedNotes.length) {
             console.log('well played!');
+            elNoteCounter.innerHTML = (gState.playedNotes.length);
+            isWin();
             setTimeout(computerTurn, 2000);
             
         }  
@@ -100,9 +102,6 @@ function noteClicked(elNote) {
         testCondition((elPiano.style.display === 'none'),'elPiano is hidden, user lost');
         
     }
-    
-    // console.log('elNote', elNote);
-    // console.log('Note', NOTES[noteIndex]);
 
 }
 
@@ -118,6 +117,13 @@ function computerTurn() {
     //Checking end of users turn.
     testCondition((gState.isUserTurn === true), 'Users turn isnt off!');
     
+}
+
+function isWin(){
+
+    if(gState.playedNotes.length === 3)win.play();
+    alert('User, beat the system');
+    testCondition(gState.currNoteToClick === 10, 'Win should play now!')
 }
 
 
