@@ -71,7 +71,9 @@ function playNote(playedNote, elNote) {
 }
 
 function noteClicked(elNote) {
-    
+
+    var noteCouner = document.querySelector('.count');
+
     if (!gState.isUserTurn) return;
     var playedNote = +elNote.getAttribute('data-note');
     console.log('playedNote is: ', playedNote);
@@ -81,6 +83,7 @@ function noteClicked(elNote) {
         playNote(playedNote, elNote)
         console.log('User OK!');
         gState.currNoteToClick++;
+        noteCouner.innerHTML = gState.currNoteToClick;
         
         if (gState.currNoteToClick === gState.playedNotes.length) {
             console.log('well played!');
