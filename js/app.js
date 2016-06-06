@@ -88,7 +88,7 @@ function noteClicked(elNote) {
         if (gState.currNoteToClick === gState.playedNotes.length) {
             console.log('well played!');
             elNoteCounter.innerHTML = (gState.playedNotes.length);
-            isWin(elNote);
+            isWin();
             setTimeout(computerTurn, 2000);
             
         }  
@@ -119,13 +119,14 @@ function computerTurn() {
     
 }
 
-function isWin(elNote){
+function isWin(){
 
-    var elPiano = elNote;
+    var elPiano = document.querySelector('.simon');
 
     if(gState.playedNotes.length === 3){
         win.play();
-        elPiano.style.display === 'none';
+        elPiano.style.display = 'none';
+        gState.isUserTurn = true;
         alert('User, beat the system');
         testCondition(gState.currNoteToClick === 3, 'Win should play now!')
     }
