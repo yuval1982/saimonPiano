@@ -67,24 +67,20 @@ function playNote(playedNote, elNote) {
         elNote.classList.remove('playing');
     }, 500);
      // A test to check, if class remains!
-    testCondition((elNote.classList.contains('.playing')),'class .playing wasnt dropped');
+    testCondition((elNote.classList.contains('playing')),'class .playing wasnt dropped');
 }
 
 function noteClicked(elNote) {
-    var noteCounter = document.querySelector('.count');
-
-
+    
     if (!gState.isUserTurn) return;
     var playedNote = +elNote.getAttribute('data-note');
     console.log('playedNote is: ', playedNote);
     
     // User clicked the right note
     if (playedNote === gState.playedNotes[gState.currNoteToClick]) {
-        playNote(playedNote, elNote);
+        playNote(playedNote, elNote)
         console.log('User OK!');
         gState.currNoteToClick++;
-        console.log(gState.currNoteToClick);
-        noteCounter.innerHTML = gState.currNoteToClick;
         
         if (gState.currNoteToClick === gState.playedNotes.length) {
             console.log('well played!');
